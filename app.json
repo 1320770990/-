@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/confirmOrder/index",
+    
+    "pages/text/text",
+    "pages/orders/index",
+    "pages/my/index",
+    "pages/index/index",
+    "pages/pay/pay"
+  ],
+  "window": {
+    "backgroundColor": "#f2f2f2",
+    "backgroundTextStyle": "light",
+    "navigationBarTitleText": "清真餐馆",
+    "navigationBarBackgroundColor": "#1296db",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1296db",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "selectedIconPath": "image/homed.png",
+        "iconPath": "image/home.png",
+        "pagePath": "pages/home/index",
+        "text": "餐馆"
+      },
+      {
+        "selectedIconPath": "image/ordered.png",
+        "iconPath": "image/order.png",
+        "pagePath": "pages/orders/index",
+        "text": "订单"
+      },
+      {
+        "selectedIconPath": "image/mined.png",
+        "iconPath": "image/mine.png",
+        "pagePath": "pages/my/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

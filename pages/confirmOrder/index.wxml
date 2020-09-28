@@ -1,0 +1,26 @@
+<view class="confirm-order-wrapper">
+  <!-- <view class="address-content content">
+  </view> -->
+  <view class="order-content content">
+    <view class="flex">
+      <image src="../../image/shop.png" class="icon"></image>
+      <text>{{name}}</text>
+    </view>
+    <view class="con-item flex" wx:for="{{list}}" wx:key="index">
+      <image class="photo" src="{{item.coverImg}}"></image>
+      <view class="con-right">
+        <view>{{item.name}}</view>
+        <view class="flex price-box">
+          <view class="price">￥{{item.price}}</view>
+          <view>x{{item.number}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="footer-wrapper flex">
+    <view class="footer-left">合计：
+      <text class="price">￥{{totalPrice}}</text>
+    </view>
+    <view class="btn" bindtap="submit">提交订单</view>
+  </view>
+</view>

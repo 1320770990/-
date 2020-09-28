@@ -1,0 +1,167 @@
+<view class="home-wrapper">
+  <view class="home-top">
+    <view class="top">
+      <image class="adv" src="{{Merchant.advertisementImg}}"></image>
+      <image class='logo' src='{{Merchant.logoImg}}'></image>
+    </view>
+    <view class="title">{{Merchant.name}}</view>
+    <view class="describe flex">
+      <!-- <text>评价4.6</text>· -->
+      <text>月售{{Merchant.monSaleNum}}单</text>
+      <!-- ·<text>蜂鸟专送约30分钟</text> -->
+    </view>
+    <!-- <view class="tag-box flex">
+      <view class="tag-item flex">
+        <view class="tag">满30减10</view>
+        <view class="tag">满50减15</view>
+        <view class="tag">满100减23</view>
+        <view class="tag">配送费优惠</view>
+      </view>
+      <view class="select-more" bindtap="selectMore">4个优惠▼</view>
+    </view> -->
+    <!-- <view class="post">公告: {{Merchant.notice}}</view> -->
+  </view>
+  <view class="sticky-wrapper">
+    <view class="tab-box flex">
+      <view class="{{currentTab == 0 ? 'tab-select' : 'tab-item'}}" bindtap='selectTab' data-idx='0'>点餐</view>
+      <view class="{{currentTab == 1 ? 'tab-select' : 'tab-item'}}" bindtap='selectTab' data-idx='1'>商家</view>
+    </view>
+
+    <view class="menu-wrapper" wx:if="{{currentTab == 0}}">
+      <!-- 左侧导航 -->
+      <view class='tui-fixed-left'>
+        <scroll-view class='tui-city-scroll' scroll-x="true" scroll-y="true" style='height:86vh;' scroll-with-animation="true" scroll-top="{{leftMenuTop}}">
+          <text class="menu-item {{index === currentActiveIndex ? 'menu-active' : ''}}" wx:for="{{goods}}" wx:key="index" data-index="{{index}}" id='{{index}}' catchtap='changeMenu'>{{item.name}}</text>
+        </scroll-view>
+      </view>
+      <!-- 右侧滚动商品 -->
+      <view class='content'>
+        <scroll-view class='tui-city-scroll-y' scroll-y="true" style='height:86vh;' scroll-with-animation="true" scroll-top="{{rightProTop}}" bindscroll="scroll">
+          <view class='pro-item' wx:for="{{goods}}" wx:for-index="parentIndex" wx:key="index">
+            <view class='tui-list-head' id="order{{parentIndex}}">{{item.name}}</view>
+            <view class='tui-list-li'>
+              <view class='goods-box' wx:for="{{item.foodDTOList}}" wx:for-item="food" wx:key="index">
+                <image class='goodsImg' src='{{food.coverImg}}'></image>
+                <view class="goods-right">
+                  <view class='goodsName'>{{food.title}}</view>
+                  <view class="sales">月售{{food.monSaleNum}}份</view>
+                  <view class="price flex">
+                    <view class="now">￥{{food.sellPrice}}</view>
+                    <view class="old" wx:if="{{food.originPrice}}">￥{{food.originPrice}}</view>
+                  </view>
+                  <view class="cart-control-wrapper flex">
+                    <button class="cart-amount-less" wx:if="{{food.count > 0}}" data-item-index="{{index}}" data-parentIndex="{{parentIndex}}" bindtap="decreaseCart">-</button>
+                    <view class="cart-amount" wx:if="{{food.count > 0}}">{{food.count}}</view>
+                    <button class="cart-amount-add" data-item-index="{{index}}" data-parentIndex="{{parentIndex}}" bindtap="addCart">+</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+
+    <view wx:if="{{currentTab == 1}}">
+      <view class="shop-box">
+        <view class="shop-back shop-bottom">
+          <view class="shop-title">商家服务</view>
+          <view class="shop-con">{{shopDetail.notice}}</view>
+        </view>
+        <view class="shop-back shop-bottom">
+          <view class="shop-title">商家实景</view>
+          <view class="shop-photo" bindtap="previewImage">
+            <image src="{{shopDetail.advertisementImg}}"></image>
+          </view>
+        </view>
+        <view class="shop-back shop-bottom">
+          <view class="shop-title">商家信息</view>
+          <view class="shop-con">暂无简介</view>
+        </view>
+        <view class="shop-back shop-flex bor">
+          <view class="shop-title">品类</view>
+          <view class="shop-con">就卖土豆丝</view>
+        </view>
+        <view class="shop-back shop-flex bor" bindtap="calling">
+          <view class="shop-title">商家电话</view>
+          <view class="shop-con" style="color:#1296db;">联系商家</view>
+        </view>
+        <view class="shop-back shop-flex bor" bindtap="getLocation">
+          <view class="shop-title">地址</view>
+          <view class="shop-con">{{shopDetail.province}} {{shopDetail.city}} {{shopDetail.district}} {{shopDetail.address}} {{shopDetail.street}}</view>
+        </view>
+        <view class="shop-back shop-flex bor">
+          <view class="shop-title">营业时间</view>
+          <view class="shop-con">{{shopDetail.beginTime}}-{{shopDetail.endTime}}</view>
+        </view>
+        <view class="shop-back shop-flex">
+          <view class="shop-title">营业资质</view>
+          <!-- <view class="shop-con">联系商家</view> -->
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="cart-bottom-wrapper" wx:if="{{currentTab == 0 && totalCount !== 0}}">
+    <view class="shop-cart" style="display:{{cartShow}}">
+      <view class="tip">已减11元,再买
+        <text>1</text>元减15元</view>
+      <view class="delete-box flex">
+        <text>已选商品</text>
+        <text class="empty-cart" bindtap="empty">清空</text>
+      </view>
+      <view class="shop-cart-box-h">
+        <view class="shop-cart-goods flex" wx:for="{{cartArray}}" wx:key="index">
+          <view class="shop-cart-goods-left">{{item.name}}</view>
+          <view class="shop-cart-goods-right flex">
+            <view class="price">￥{{item.price*item.number}}</view>
+            <view class="cart-control-wrapper flex">
+              <button class="cart-amount-less" data-item-index="{{item.index}}" data-parentIndex="{{item.parentIndex}}" catchtap="decreaseShopCart">-</button>
+              <view class="cart-amount">{{item.number}}</view>
+              <button class="cart-amount-add" data-item-index="{{item.index}}" data-parentIndex="{{item.parentIndex}}" catchtap="addShopCart">+</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cart-wrapper flex" bindtap="purchaseGoods">
+      <view class="cart-left">
+        <text>￥{{totalPrice}}</text>
+        <text class="old-price" wx:if="{{totalOldPrice > 0}}">￥{{totalOldPrice}}</text>
+      </view>
+      <view class="cart-right cart-btn" catchtap="submit">去结算</view>
+    </view>
+  </view>
+
+
+  <view class="cart-wrapper flex" wx:if="{{currentTab == 0 && totalCount == 0}}">
+    <view class="cart-left">
+      <text>未选购商品</text>
+    </view>
+    <view class="cart-right">￥{{minPrice}}起送</view>
+  </view>
+
+  <!--屏幕背景变暗的背景  -->
+  <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+  <!--弹出框  -->
+  <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+    <view class="close" bindtap="hideModal">×</view>
+    <view class="dialog-title">优惠活动</view>
+    <view class="flex">
+      <view class="dialog-item">满减</view>
+      <view class="dialog-con">满30元减11元, 满50元减15元, 满100元减23元</view>
+    </view>
+    <view class="flex">
+      <view class="dialog-item">会员</view>
+      <view class="dialog-con">超级会员领6元无门槛红包</view>
+    </view>
+    <view class="flex">
+      <view class="dialog-item">配送</view>
+      <view class="dialog-con">配送费立减2元</view>
+    </view>
+    <view class="flex">
+      <view class="dialog-item">首单</view>
+      <view class="dialog-con">饿了么新用户首单立减6元</view>
+    </view>
+  </view>
+</view>

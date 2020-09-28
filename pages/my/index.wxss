@@ -1,0 +1,46 @@
+/* pages/my/index.wxss */
+.mine-wrapper {
+  background-color: #fff;
+  height: 100vh;
+}
+.avator {
+    border-radius: 50%;
+    width: 130rpx;
+    height: 130rpx;
+    margin-right: 20rpx;
+    overflow: hidden;
+}
+
+.name {
+    /* color: #fff; */
+}
+
+.subtitle {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 50rpx;
+}
+
+.mine-top {
+  padding: 20rpx 40rpx;
+}
+
+.avatar {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+}
+
+.right {
+  padding-left: 20rpx;
+}
+
+.right .mine-name {
+  padding-top: 10rpx;
+}
+
+.right image {
+  width: 150rpx;
+  height: 54rpx;
+}
+

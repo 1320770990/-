@@ -1,0 +1,13 @@
+<!--index.wxml-->
+<view class="home-wrapper">
+  <view class="logo-wrapper">
+  <view class="toast">
+    <view class="toast-top flex">
+      <text>清真餐馆 申请使用</text>
+    </view>
+    <view class="text">凡在本网所有订的巴拉巴拉巴拉； 八八八Abba啦，请放心吃。 </view>
+  </view>
+    <button bindgetuserinfo="getUserInfo" open-type="getUserInfo"> 微信快捷登录 </button>
+  </view>
+  
+</view>

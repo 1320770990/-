@@ -1,0 +1,28 @@
+<view class="order-wrapper">
+  <view wx:if="{{show}}">
+    <view class="tips-box">
+      <view class="tips">登录后查看历史订单</view>
+      <view class="btn">
+        <button type="primary" size="mini" bindtap="goUser">立即查看</button>
+      </view>
+    </view>
+  </view>
+  <view wx:else>
+    <!-- <view class="tips-box">
+      <view class="tips">暂无订单~</view>
+    </view> -->
+    <view class="order-content content">
+      <view class="flex">
+        <image src="../../image/shop.png" class="icon"></image>
+        <text>商家名称</text>
+      </view>
+      <view class="con-item flex">
+        <image class="photo"></image>
+        <view class="con-right">
+          <view>下单时间: 2020-07-05</view>
+          <view>总价: ￥234.00</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

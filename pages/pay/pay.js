@@ -1,0 +1,21 @@
+Page({
+    data:{
+        resultType:"",
+        resultContent:""
+    },
+    onLoad:function(options){
+      console.log(options.resultType)
+        var resultType=options.resultType;
+        if(resultType=="success"){
+            this.setData({
+                resultType:"success",
+                resultContent:"支付成功"
+            });
+        }else{
+            this.setData({
+                resultType:"warn",
+                resultContent:"支付失败"
+            });
+        }
+    }
+});
